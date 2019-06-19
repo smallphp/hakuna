@@ -3,6 +3,6 @@ def application(environ, start_response):
 	from mvc.route import Route
 	from mvc.request import Request
 	route = Route()
-	route.add('(<controller>)-(<action>).html',{'controller':'[a-zA-Z]+','action':'[a-zA-Z]+'})
+	route.add('(<controller>)-(<action>).html',{'controller':'[a-zA-Z]+','action':'[a-zA-Z]+'},{'controller':'index','action':'index'})
 	request = Request()
 	return [request.execute(environ)]

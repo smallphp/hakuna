@@ -12,8 +12,8 @@ class Request():
 	init
 	"""
 	def __init__(self):
-		self.controller = ''
-		self.action = ''
+		self.controller = 'index'
+		self.action = 'index'
 		self.params = {}
 	
 	"""
