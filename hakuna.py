@@ -18,6 +18,13 @@ class Hakuna():
 		return application
 	
 	"""
+	addroute
+	"""
+	def addRoute(self, path, pattern={}, default={}):
+		from mvc.route import Route
+		route = Route()
+		route.add(path, pattern, default)
+	"""
 	web
 	"""
 	def __web(self, environ):

@@ -13,8 +13,8 @@ class Request():
 	"""
 	def __init__(self, object):
 		self.hakuna = object
-		self.controller = 'index'
-		self.action = 'index'
+		self.controller = ''
+		self.action = ''
 		self.params = {}
 	
 	"""
@@ -23,16 +23,19 @@ class Request():
 	@return bool
 	"""
 	def __parse(self, path_info):
-		route = Route()
-		routeTable = route.get()
-		for item in routeTable:
-			match = re.match(routeTable[item], path_info)
-			if (match):
-				self.controller = match.group('controller')
-				self.action = match.group('action')
-		if self.controller and self.action :
+		if (path_info) :
+			route = Route()
+			routeTable = route.get()
+			for item in routeTable:
+				match = re.match(routeTable[item], path_info)
+				if (match):
+					self.controller = match.group('controller')
+					self.action = match.group('action')
+			if self.controller and self.action :
+				return True
+		else: 
+			self.controller = self.action = 'index'
 			return True
-		return False	
 	
 	"""
 
