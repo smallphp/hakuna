@@ -7,11 +7,12 @@ from mvc.route import Route
 from mvc.response import Response
 	
 class Request():
-
+	
 	"""
 	init
 	"""
-	def __init__(self):
+	def __init__(self, object):
+		self.hakuna = object
 		self.controller = 'index'
 		self.action = 'index'
 		self.params = {}
@@ -44,7 +45,7 @@ class Request():
 		result = self.__parse(environ['PATH_INFO'][1:])
 		if (result):
 			try:
-				controller = __import__('controller.'+self.controller)
+				controller = __import__(self.hakuna.config['controller_dir']+'.'+self.controller)
 				try:
 					module = getattr(controller, self.controller)
 					try:
