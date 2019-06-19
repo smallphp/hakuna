@@ -1,4 +1,7 @@
 # hakuna matata
+
+环境 python3  
+
 setup 1)  
 运行
 /usr/local/python/bin/uwsgi uwsgi.ini  
