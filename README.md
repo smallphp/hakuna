@@ -8,7 +8,7 @@ setup 1)
 
 setup 2)  
 
-测试GET方式  
+测试GET方式    
 curl 127.0.0.1:8080  
 结果  
 <h1>hakuna matata!</h1>  
