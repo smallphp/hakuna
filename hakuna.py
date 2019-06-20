@@ -1,12 +1,25 @@
+import os
+from mvc.route import Route
+from mvc.request import Request
+from mvc.response import Response
+
 class Hakuna():
 
-	import os
-	
+	route = None
+
+	request = None
+
+	response = None 
+		
 	config = {
 		'base_dir': os.getcwd(),
 		'controller_dir' : 'controller'
 	}
-	
+
+	def __init__(self):
+		Hakuna.route = Route()
+		Hakuna.request = Request(self)
+		Hakuna.response = Response()
 	"""
 	wsgi
 	"""
@@ -21,14 +34,9 @@ class Hakuna():
 	addroute
 	"""
 	def addRoute(self, path, pattern={}, default={}):
-		from mvc.route import Route
-		route = Route()
-		route.add(path, pattern, default)
+		Hakuna.route.add(path, pattern, default)
 	"""
 	web
 	"""
 	def __web(self, environ):
-		from mvc.route import Route 
-		from mvc.request import Request
-		request = Request(self)
-		return request.execute(environ)
+		return Hakuna.request.execute(environ)

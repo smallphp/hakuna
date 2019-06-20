@@ -1,3 +1,7 @@
 class Index():
-	def index():
-		return '<h1>hakuna matata!</h1>'
+	def index(self):
+		if self.request.method == 'POST':
+			post = self.request.post()
+			return post	
+		else :
+			return '<h1>hukuna matata</h1>'

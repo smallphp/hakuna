@@ -25,6 +25,6 @@ class Response():
 		self.content = content
 	
 	def __call__(self):
-		return (self.content.encode('utf-8'), 200, self.headers)
+		return (str(self.content).encode('utf-8'), 200, self.headers)
 	
 	
