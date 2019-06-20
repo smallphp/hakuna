@@ -1,4 +1,4 @@
-# hakuna matata 一个简单的python web框架
+# hakuna 一个简单的Python Web框架
 
 环境 python3  
 
