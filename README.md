@@ -1,8 +1,15 @@
 # hakuna matata
+
+环境 python3  
+
 setup 1)  
 运行
 /usr/local/python/bin/uwsgi uwsgi.ini  
 
 setup 2)  
 测试
-curl 127.0.0.1:8080
+curl 127.0.0.1:8080  
+
+setup 3)  
+结果  
+<h1>hakuna matata!</h1>
