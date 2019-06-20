@@ -7,9 +7,13 @@ setup 1)
 /usr/local/python/bin/uwsgi uwsgi.ini  
 
 setup 2)  
-测试
-curl 127.0.0.1:8080  
 
-setup 3)  
+测试GET方式
+curl 127.0.0.1:8080   
 结果  
-<h1>hakuna matata!</h1>
+<h1>hakuna matata!</h1>  
+
+测试POST方式  
+curl 127.0.0.1:8080 -d '{"name":"leon"}'  
+结果  
+{'name': 'leon'}  
