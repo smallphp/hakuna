@@ -18,16 +18,6 @@ curl 127.0.0.1:8080 -d '{"name":"leon"}'
 结果  
 {'name': 'leon'}    
 
-
-
-
-
-
-
-
-
-
-
 路由实现原理  
 每个路由包含 uri pattern default 三个元素，如下示例  
 (<controller>)-(<action>) {"controller":"[a-z]+","action":"[a-c]+"} {"controller":"index","action":"index"}  
