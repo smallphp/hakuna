@@ -13,9 +13,18 @@
 		new_id = 1
 """
 class Route():
-	
+		
+	#hakuna
+	hakuna = None
+		
 	#路由表
 	__routeTables = {}
+	
+	"""
+	__init__
+	"""
+	def __init__(self, hakuna):
+		self.hakuna = hakuna
 	
 	"""
 	添加路由

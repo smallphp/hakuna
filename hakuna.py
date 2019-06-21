@@ -1,31 +1,38 @@
+"""
+	python web framework
+"""
+
 import os
-from mvc.route import Route
-from mvc.request import Request
-from mvc.response import Response
+from hakuna.mvc.route import Route
+from hakuna.mvc.request import Request
+from hakuna.mvc.response import Response
 
 class Hakuna():
-
-	route = None
-
-	request = None
-
-	response = None 
+	
+	route = request = response = None 
 		
 	config = {
 		'base_dir': os.getcwd(),
 		'controller_dir' : 'controller'
 	}
-
-	def __init__(self):
-		Hakuna.route = Route()
-		Hakuna.request = Request(self)
-		Hakuna.response = Response()
+	
 	"""
-	wsgi
+	__init__
+	"""
+	def __init__(self, **kw):
+		if Hakuna.route is None:
+			Hakuna.route = Route(self)
+		if Hakuna.request is None:
+			Hakuna.request = Request(self)
+		if Hakuna.response is None:
+			Hakuna.response = Response(self)
+	
+	"""
+	wsgi application
 	"""
 	def wsgi(self):
 		def application(environ, start_response):
-			body = self.__web(environ)
+			body = self.__runWeb(environ)
 			start_response(str(body[1]), body[2])
 			return [body[0]]
 		return application
@@ -35,8 +42,9 @@ class Hakuna():
 	"""
 	def addRoute(self, path, pattern={}, default={}):
 		Hakuna.route.add(path, pattern, default)
+	
 	"""
 	web
 	"""
-	def __web(self, environ):
+	def __runWeb(self, environ):
 		return Hakuna.request.execute(environ)

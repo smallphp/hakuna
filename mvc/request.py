@@ -3,8 +3,6 @@
 	
 """
 import re
-from mvc.route import Route
-from mvc.response import Response
 	
 class Request():
 	
@@ -27,8 +25,7 @@ class Request():
 	"""
 	def __parse(self, path_info):
 		if (path_info) :
-			route = Route()
-			routeTable = route.get()
+			routeTable = self.object.route.get()
 			for item in routeTable:
 				match = re.match(routeTable[item], path_info)
 				if (match):
@@ -49,11 +46,12 @@ class Request():
 	def execute(self, environ):
 		self.__environ = environ
 		self.method = environ['REQUEST_METHOD']
-		response = Response()
+		response = self.hakuna.response
 		result = self.__parse(environ['PATH_INFO'][1:])
 		if (result):
 			try:
 				controller = __import__(self.hakuna.config['controller_dir']+'.'+self.controller)
+				print(self.hakuna.config)
 				try:
 					module = getattr(controller, self.controller)
 					try:
@@ -76,17 +74,21 @@ class Request():
 		return response()
 
 	"""
-	post 获取数据
+	post 获取POST数据
+	@parma str key
+	@return mixed
 	"""
 	def post(self, key=None):
-		leng = self.__environ.get('CONTENT_LENGTH');
-		if leng is None:
-			leng = 0
-		data = self.__environ.get('wsgi.input').read(int(leng))
-		data = eval(data.decode('utf-8'))
-		if key is not None:
-			if key in data:
-				return data[key]
-			else :
-				return None
-		return data
+		if self.method == 'POST':
+			leng = self.__environ.get('CONTENT_LENGTH');
+			if leng is None:
+				leng = 0
+			data = self.__environ.get('wsgi.input').read(int(leng))
+			data = eval(data.decode('utf-8'))
+			if key is not None:
+				if key in data:
+					return data[key]
+				else :
+					return None
+			return data
+		return None
